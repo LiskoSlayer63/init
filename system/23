@@ -1,0 +1,2 @@
+With graphic session, type in su - <username> and give your password when asked.
+With ssh session, execute command: 'ssh <username>@127.0.0.1 -p 2222', and give password after that

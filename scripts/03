@@ -1,0 +1,51 @@
+#!/bin/bash
+
+SERVER="liznet.fi"
+CHANNEL="Hive"
+
+ROOT="$HOME"
+ZIRC="$ROOT/.zirc"
+ZSH="$ROOT/.zshrc"
+
+echo "This will install ZIRC client and configure it to ready to use"
+echo; read -rsn1 -p "Press any key to continue . . ."; echo
+echo "Downloading ZIRC ..."
+
+if curl -s -S "https://raw.githubusercontent.com/aeruder/zirc/master/zirc" > "$ZIRC"
+then	
+	echo "Installing ZIRC ..."
+
+	if [ -f "$ZSH" ]
+	then
+		echo >> "$ZSH"
+		echo "# ZIRC INSTALLATION:" >> "$ZSH"
+		
+		echo "source $ZIRC" >> "$ZSH"
+		echo "zirc_aliases >> /dev/null" >> "$ZSH"
+		echo >> "$ZSH"
+
+		echo "SERVER=\"$SERVER\"" >> "$ZSH"
+		echo "CHANNEL=\"$CHANNEL\"" >> "$ZSH"
+		echo >> "$ZSH"
+
+		echo "alias irc=\"zirc_connect \$SERVER\"" >> "$ZSH"
+		echo "alias nirc=\"zirc_disconnect\"" >> "$ZSH"
+		echo "alias hive=\"zirc_join \$CHANNEL\"" >> "$ZSH"
+		echo >> "$ZSH"
+
+		echo "ZIRC succesfully installed!"
+		echo
+		echo "Usable commands:"
+		echo "    irc  - Connect to the predefined chat server."
+		echo "    nirc - Disconnect from any server."
+		echo "    hive - Join to the #$CHANNEL channel."
+		echo
+		echo "To see more help use command 'zirc_help'."
+		
+		exec zsh -l
+	else
+		echo "ZSH not found!"
+	fi
+else 
+	echo "Error while downloading!"
+fi

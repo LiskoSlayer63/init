@@ -1,0 +1,3 @@
+#to see DNS entries, use cat /etc/hosts
+
+hosts file located at /etc

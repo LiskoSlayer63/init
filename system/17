@@ -1,0 +1,4 @@
+#Depending on your network settings, if they are attatching to NAT or bridged adapter
+
+ssh <login>@127.0.0.1 -p 2222
+
